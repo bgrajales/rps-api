@@ -82,7 +82,7 @@ io.on('connection', (socket) => {
 
 })
 
-server.listen(3001, () => {
+server.listen(process.env.socketPort || 4001, () => {
     console.log('listening on port 4001')
 })
 // Users
