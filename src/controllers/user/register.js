@@ -6,10 +6,10 @@ const { userModel } = require('../../models/user')
 module.exports = (request, response) => {
 
     const user = request.body
-
+    console.log(user)
     const schema = Joi.object({
         userName: Joi.string()
-            .regex(/[a-zA-Z]+ [a-zA-Z]+/i)
+            .regex(/^[a-zA-Z0-9]+$/)
             .min(3)
             .max(30)
             .required(),
@@ -67,6 +67,7 @@ module.exports = (request, response) => {
             }
         })
     } else {
+        console.log(validationResult.error)
         response.status(400).json(validationResult.error)
     }
 }

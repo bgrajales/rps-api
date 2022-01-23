@@ -42,7 +42,7 @@ module.exports = async( request, response ) => {
                 },
             }
 
-            user.activeGames.push(newUserGame);
+            user.activeGames.unshift(newUserGame);
             user.save();
 
             userModel.findOne({
@@ -68,8 +68,8 @@ module.exports = async( request, response ) => {
                     gameId: id,
                 }
 
-                challengedUser.notifications.push(newNotification);
-                challengedUser.activeGames.push(newChallengedGame);
+                challengedUser.notifications.unshift(newNotification);
+                challengedUser.activeGames.unshift(newChallengedGame);
                 challengedUser.save();
 
                 response.status(200).send({

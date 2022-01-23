@@ -3,18 +3,24 @@ const { userModel } = require('../../models/user');
 module.exports = (request, response) => {
 
     const userId = request.query.userId;
+    const page = request.query.page;
+    const limit = 4
 
-    console.log('Getting active games', userId)
-    
     userModel.findOne({
         _id: userId
     }).then( user => {
 
-        const activeGames = user.activeGames;
+        const gamesArray = user.activeGames;
 
-        response.json({
-            activeGames
+        const maxPages = (gamesArray.length / limit) > 1 ? Math.ceil(gamesArray.length / limit) : 1;
+        
+        const games = gamesArray.slice( (page - 1) * limit, page * limit );
+
+        response.status(200).json({
+            games,
+            maxPages
         });
+
     }).catch( err => {
         console.log(err);
     });

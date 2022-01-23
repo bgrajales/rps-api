@@ -26,7 +26,6 @@ module.exports = ( request, response ) => {
                         } else if (round.winner === 'draw') {
                             winsTie++
                         }
-
         
                 })
                 
@@ -48,7 +47,7 @@ module.exports = ( request, response ) => {
                     ]
                 }
                     
-                user.gamesHistory.push(finishedGame)
+                user.gamesHistory.unshift(finishedGame)
 
                 user.markModified('gameHistory')
                 user.save().then(() => {
@@ -56,8 +55,17 @@ module.exports = ( request, response ) => {
                     userModel.findOne({
                         _id: userId
                     }).then( user => {
+
+                            const index = user.activeGames.findIndex( activeGame => activeGame.id === gameId )
                         
-                            user.activeGames.splice(user.activeGames.indexOf(activeGame), 1)
+                            user.activeGames.splice(index, 1)
+                            // user.activeGames.splice(user.activeGames.indexOf(activeGame), 1)
+
+                            const notifIndex = user.notifications.findIndex( notif => notif.gameId === gameId )
+
+                            user.notifications.splice(notifIndex, 1)
+
+                            user.markModified('notifications')
                             user.markModified('activeGames')
                             user.save()
                             .then(() => {
