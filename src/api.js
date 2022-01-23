@@ -28,10 +28,7 @@ const io = socket(server, {
         optionsSuccessStatus: 204
     },
     origins: '*',
-    transports: ['websocket', 'polling'],
-    polling: {
-        duration: 10,
-    },
+    transports: ['websocket'],
 })
 
 const changeStatus = require('./middlewares/status')
