@@ -28,7 +28,7 @@ const io = socket(server, {
         optionsSuccessStatus: 204
     },
     origins: '*',
-    transports: ['xhr-polling'],
+    transports: ['websocket', 'polling'],
     polling: {
         duration: 10,
     },
