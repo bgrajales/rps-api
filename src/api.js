@@ -26,7 +26,8 @@ const io = socket(server, {
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         preflightContinue: false,
         optionsSuccessStatus: 204
-    }
+    },
+    origins: '*:*',
 })
 
 const changeStatus = require('./middlewares/status')
