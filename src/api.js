@@ -32,6 +32,11 @@ const io = socket(server, {
 
 const changeStatus = require('./middlewares/status')
 
+io.configure(() => {
+    io.set('transports', ['xhr-polling'])
+    io.set('polling duration', 10)
+})
+
 io.on('connection', (socket) => {
     console.log('made socket connection', socket.id)
     let userId
