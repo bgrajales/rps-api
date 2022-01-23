@@ -28,14 +28,13 @@ const io = socket(server, {
         optionsSuccessStatus: 204
     },
     origins: '*:*',
+    transports: ['xhr-polling', 'websocket', 'htmlfile', 'jsonp-polling', 'polling', 'flashsocket'],
+    polling: {
+        duration: 10,
+    },
 })
 
 const changeStatus = require('./middlewares/status')
-
-io.configure(() => {
-    io.set('transports', ['xhr-polling'])
-    io.set('polling duration', 10)
-})
 
 io.on('connection', (socket) => {
     console.log('made socket connection', socket.id)
