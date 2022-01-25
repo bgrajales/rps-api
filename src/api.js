@@ -131,7 +131,14 @@ app.get('/getGamesHistory', getGamesHistory)
 
 mongoose.connect(getDbConnectionString(), { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
-        app.listen(process.env.PORT)
+        app.listen(process.env.PORT, {
+            cors: {
+                origin: '*',
+                methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+                preflightContinue: false,
+                optionsSuccessStatus: 204
+            }
+        })
     }).catch(error => {
         console.error('No fue posible conectarse a la base de datos', error)
     })
