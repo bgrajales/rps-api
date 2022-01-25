@@ -15,7 +15,7 @@ app.use(express.json())
 
 // socket.io
 
-const PORT = process.env.PORT || 4001
+const PORT = process.env.socketPort || 4001
 
 const http = require('http')
 const socket = require('socket.io')
@@ -131,14 +131,7 @@ app.get('/getGamesHistory', getGamesHistory)
 
 mongoose.connect(getDbConnectionString(), { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
-        app.listen(process.env.PORT, {
-            cors: {
-                origin: '*',
-                methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-                preflightContinue: false,
-                optionsSuccessStatus: 204
-            }
-        })
+        app.listen(process.env.PORT)
     }).catch(error => {
         console.error('No fue posible conectarse a la base de datos', error)
     })
