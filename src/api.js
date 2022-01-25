@@ -84,9 +84,6 @@ io.on('connection', (socket) => {
 
 })
 
-server.listen(PORT, () => {
-    console.log(`listening on port ${PORT}`)
-})
 // Users
 
 const login = require('./controllers/user/login')
@@ -131,7 +128,9 @@ app.get('/getGamesHistory', getGamesHistory)
 
 mongoose.connect(getDbConnectionString(), { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
-        app.listen(process.env.PORT)
+        server.listen(PORT, () => {
+            console.log(`listening on port ${PORT}`)
+        })
     }).catch(error => {
         console.error('No fue posible conectarse a la base de datos', error)
     })
