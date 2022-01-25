@@ -14,28 +14,32 @@ module.exports = (request, response) => {
 
         const gamesWon = user.gamesHistory.filter(game => game.win === 1).length
 
-        let winningStreak = {
-            currentStreak: 0,
-            unbroken: true,
-        }
+        let winningStreak = 0
+        let stop = false
 
         if (gamesWon > 0) {
 
-        for (let i = user.gamesHistory.length-1; i > 0; i--) {
-            if (user.gamesHistory[i].win === 1 && winningStreak.unbroken) {
-                winningStreak = winningStreak + 1
-            } else {
-                winningStreak = 0
-                winningStreak.unbroken = false
-            }
-        }
+            user.gamesHistory.forEach( (game, index) => {
+
+                if ( index === 0 && game.win === 0 ) {
+                    winningStreak = 0
+                    stop = true
+                } else {
+                    if ( game.win === 1 && !stop ) {
+                        winningStreak++
+                        stop = false
+                    } else {
+                        stop = true
+                    }
+                }
+            })
 
         }
 
         response.json({
             gamesPlayed,
             gamesWon,
-            winningStreak: winningStreak.currentStreak,
+            winningStreak
         })
     } else {
         response.json({
