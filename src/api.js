@@ -15,6 +15,8 @@ app.use(express.json())
 
 // socket.io
 
+const socketPort = process.env.socketPort || 4001
+
 const http = require('http')
 const socket = require('socket.io')
 
@@ -24,11 +26,7 @@ const io = socket(server, {
     cors: {
         origin: '*',
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-        preflightContinue: false,
-        optionsSuccessStatus: 204
-    },
-    origins: '*',
-    transports: ['websocket'],
+    }
 })
 
 const changeStatus = require('./middlewares/status')
@@ -84,8 +82,8 @@ io.on('connection', (socket) => {
 
 })
 
-server.listen(process.env.socketPort || 4001, () => {
-    console.log('listening on port 4001')
+server.listen(socketPort, () => {
+    console.log(`listening on port ${socketPort}`)
 })
 // Users
 
