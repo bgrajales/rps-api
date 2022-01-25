@@ -15,7 +15,7 @@ app.use(express.json())
 
 // socket.io
 
-const PORT = process.env.socketPort || 4001
+const PORT = process.env.PORT || 4001
 
 const http = require('http')
 const socket = require('socket.io')
