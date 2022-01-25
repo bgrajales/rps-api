@@ -15,7 +15,7 @@ app.use(express.json())
 
 // socket.io
 
-const socketPort = process.env.socketPort || 4001
+const PORT = process.env.PORT || 4001
 
 const http = require('http')
 const socket = require('socket.io')
@@ -82,8 +82,8 @@ io.on('connection', (socket) => {
 
 })
 
-server.listen(socketPort, () => {
-    console.log(`listening on port ${socketPort}`)
+server.listen(PORT, () => {
+    console.log(`listening on port ${PORT}`)
 })
 // Users
 
