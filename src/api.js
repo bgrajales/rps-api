@@ -95,6 +95,7 @@ const getStats = require('./controllers/user/getStats')
 const getGamesHistory = require('./controllers/user/getGameHistroy')
 const markNotificationAsRead = require('./controllers/user/markNotificationsAsRead')
 const deleteSelectedNotif = require('./controllers/user/deleteSelectedNotif')
+const searchUsers = require('./controllers/user/searchUsers')
 
 // Games
 
@@ -113,6 +114,7 @@ app.post('/alreadyLoggedIn', alreadyLoggedIn)
 app.post('/logout', logout)
 app.post('/markNotificationAsRead', markNotificationAsRead)
 app.post('/deleteSelectedNotif', deleteSelectedNotif)
+app.post('/searchUsers', searchUsers)
 app.get('/getChallengers', getChallengers)
 app.get('/getStats', getStats)
 
