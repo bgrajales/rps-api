@@ -114,7 +114,7 @@ app.post('/alreadyLoggedIn', alreadyLoggedIn)
 app.post('/logout', logout)
 app.post('/markNotificationAsRead', markNotificationAsRead)
 app.post('/deleteSelectedNotif', deleteSelectedNotif)
-app.post('/searchUsers', searchUsers)
+app.post('/searchUser', searchUser)
 app.get('/getChallengers', getChallengers)
 app.get('/getStats', getStats)
 
