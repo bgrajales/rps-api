@@ -5,7 +5,10 @@ module.exports = (request, response) => {
     const userName = request.query.userName
 
     userModel.findOne({
-        userName: userName
+        userName: {
+            $regex: userName,
+            $options: 'i'
+        }
     }).then(user => {
 
         if (user) {
