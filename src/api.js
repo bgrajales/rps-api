@@ -95,7 +95,7 @@ const getStats = require('./controllers/user/getStats')
 const getGamesHistory = require('./controllers/user/getGameHistroy')
 const markNotificationAsRead = require('./controllers/user/markNotificationsAsRead')
 const deleteSelectedNotif = require('./controllers/user/deleteSelectedNotif')
-const searchUsers = require('./controllers/user/searchUser')
+const searchUser = require('./controllers/user/searchUser')
 
 // Games
 
