@@ -22,7 +22,7 @@ module.exports = ( request, response ) => {
                 if ( activeGame.rounds[round-1].player2hand !== 'null' ) {
                         
                         if ( activeGame.rounds[round-1].player1hand === activeGame.rounds[round-1].player2hand ) {
-                            activeGame.rounds[round-1].winner = 'draw';
+                            activeGame.rounds[round-1].winner = 'tie';
                         } else if ( activeGame.rounds[round-1].player1hand === 'r' && activeGame.rounds[round-1].player2hand === 's' ) {
                             activeGame.rounds[round-1].winner = 'player1';
                         } else if ( activeGame.rounds[round-1].player1hand === 'p' && activeGame.rounds[round-1].player2hand === 'r' ) {
@@ -55,7 +55,7 @@ module.exports = ( request, response ) => {
                                     if ( challengerActiveGame.rounds[round-1].player1hand !== 'null' ) {
 
                                         if ( challengerActiveGame.rounds[round-1].player1hand === challengerActiveGame.rounds[round-1].player2hand ) {
-                                            challengerActiveGame.rounds[round-1].winner = 'draw';
+                                            challengerActiveGame.rounds[round-1].winner = 'tie';
                                         } else if ( challengerActiveGame.rounds[round-1].player1hand === 'r' && challengerActiveGame.rounds[round-1].player2hand === 's' ) {
                                             challengerActiveGame.rounds[round-1].winner = 'player1';
                                         } else if ( challengerActiveGame.rounds[round-1].player1hand === 'p' && challengerActiveGame.rounds[round-1].player2hand === 'r' ) {

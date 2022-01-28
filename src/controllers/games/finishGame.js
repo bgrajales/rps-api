@@ -23,17 +23,20 @@ module.exports = ( request, response ) => {
                             winsPlayer1++
                         } else if (round.winner === 'player2') {
                             winsPlayer2++
-                        } else if (round.winner === 'draw') {
+                        } else if (round.winner === 'tie') {
                             winsTie++
                         }
         
                 })
                 
                 let win
+                
                 if (winsPlayer1 > winsPlayer2) {
                     win = 1
-                } else {
+                } else if (winsPlayer1 < winsPlayer2) {
                     win = 0
+                } else {
+                    win = 2
                 }
 
                 const finishedGame = {
@@ -41,9 +44,18 @@ module.exports = ( request, response ) => {
                     opponent: activeGame.player2.userName,
                     win: win,
                     picks: [
-                        activeGame.rounds[0].player1hand,
-                        activeGame.rounds[1].player1hand,
-                        activeGame.rounds[2].player1hand,
+                        {
+                            winner: activeGame.rounds[0].winner,
+                            pick: activeGame.rounds[0].player1hand
+                        },
+                        {
+                            winner: activeGame.rounds[1].winner,
+                            pick: activeGame.rounds[1].player1hand
+                        },
+                        {
+                            winner: activeGame.rounds[2].winner,
+                            pick: activeGame.rounds[2].player1hand
+                        }
                     ]
                 }
                     
