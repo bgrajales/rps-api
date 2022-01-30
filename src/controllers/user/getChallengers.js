@@ -2,7 +2,7 @@ const { userModel } = require('../../models/user')
 
 module.exports = (request, response) => {
 
-    const limit = 6
+    const limit = 5
     const skip = request.query.skip || 0
     const userId = request.query.userId
 

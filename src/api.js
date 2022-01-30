@@ -84,6 +84,7 @@ io.on('connection', (socket) => {
 
 })
 
+const checkUserCredentials = require('./middlewares/checkUserCredentials')
 // Users
 
 const login = require('./controllers/user/login')
@@ -96,6 +97,7 @@ const getGamesHistory = require('./controllers/user/getGameHistroy')
 const markNotificationAsRead = require('./controllers/user/markNotificationsAsRead')
 const deleteSelectedNotif = require('./controllers/user/deleteSelectedNotif')
 const searchUser = require('./controllers/user/searchUser')
+const refreshToken = require('./controllers/user/refreshToken')
 
 // Games
 
@@ -110,23 +112,24 @@ const finishGame = require('./controllers/games/finishGame')
 
 app.post('/login', login)
 app.post('/register', register)
-app.post('/alreadyLoggedIn', alreadyLoggedIn)
 app.post('/logout', logout)
-app.post('/markNotificationAsRead', markNotificationAsRead)
-app.post('/deleteSelectedNotif', deleteSelectedNotif)
-app.post('/searchUser', searchUser)
-app.get('/getChallengers', getChallengers)
-app.get('/getStats', getStats)
+app.post('/alreadyLoggedIn', alreadyLoggedIn)
+app.post('/refreshToken', refreshToken)
+app.post('/markNotificationAsRead', checkUserCredentials(), markNotificationAsRead)
+app.post('/deleteSelectedNotif', checkUserCredentials(), deleteSelectedNotif)
+app.get('/searchUser', checkUserCredentials(), searchUser)
+app.get('/getChallengers', checkUserCredentials(), getChallengers)
+app.get('/getStats', checkUserCredentials(), getStats)
 
 // Games endpoints
 
-app.post('/challengeUser', challengeUser)
-app.post('/setActiveGamePlayerHand', setActiveGamePlayerHand)
-app.post('/nextRound', nextRound)
-app.post('/finishGame', finishGame)
-app.get('/getActiveGames', getActiveGames)
-app.get('/getActiveGameById', getActiveGameById)
-app.get('/getGamesHistory', getGamesHistory)
+app.post('/challengeUser', checkUserCredentials(), challengeUser)
+app.post('/setActiveGamePlayerHand', checkUserCredentials(), setActiveGamePlayerHand)
+app.get('/nextRound', checkUserCredentials(), nextRound)
+app.post('/finishGame', checkUserCredentials(), finishGame)
+app.get('/getActiveGames', checkUserCredentials(), getActiveGames)
+app.get('/getActiveGameById', checkUserCredentials(), getActiveGameById)
+app.get('/getGamesHistory', checkUserCredentials(), getGamesHistory)
 
 mongoose.connect(getDbConnectionString(), { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {

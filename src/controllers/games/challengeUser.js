@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 module.exports = async( request, response ) => {
 
-    const userId = request.query.userId;
+    const userId = request.body.userId;
 
     console.log(`User ${userId} is challenging you!`);
 
@@ -12,9 +12,9 @@ module.exports = async( request, response ) => {
         _id: userId
     }).then( user => {
 
-        const challenged = request.query.challengedId;
-        const challengedName = request.query.challengedName;
-        const userName = request.query.userName;
+        const challenged = request.body.challengedId;
+        const challengedName = request.body.challengedName;
+        const userName = request.body.userName;
 
         console.log(user.activeGames, challenged);
 
@@ -25,7 +25,10 @@ module.exports = async( request, response ) => {
         console.log(alreadyChallenged);
 
         if(alreadyChallenged !== undefined) {
-            response.status(400).send('You have already challenged this user!');
+            // response.status(400).send('You have already challenged this user!');
+            response.status(400).json({
+                message: `You have already challenged ${challengedName}!`
+            });
         } else {
 
             const id = mongoose.Types.ObjectId();

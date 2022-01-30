@@ -2,12 +2,12 @@ const { userModel } = require('../../models/user');
 
 module.exports = ( request, response ) => {
 
-    const userId = request.query.userId;
-    const challengedId = request.query.challengedId;
+    const userId = request.body.userId;
+    const challengedId = request.body.challengedId;
 
-    const gameId = request.query.gameId;
-    const round = request.query.round;
-    const hand = request.query.hand;
+    const gameId = request.body.gameId;
+    const round = request.body.round;
+    const hand = request.body.hand;
    
     userModel.findOne({
         _id: userId

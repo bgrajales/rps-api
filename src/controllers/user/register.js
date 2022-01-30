@@ -10,8 +10,8 @@ module.exports = (request, response) => {
     const schema = Joi.object({
         userName: Joi.string()
             .regex(/^[a-zA-Z0-9]+$/)
-            .min(3)
-            .max(30)
+            .min(5)
+            .max(12)
             .required(),
         password: Joi.string()
             .alphanum()
@@ -62,12 +62,14 @@ module.exports = (request, response) => {
                 })
             } else {
                 response.status(400).json({
-                    message: 'El usuario ya existe'
+                    message: 'User already exists'
                 })
             }
         })
     } else {
         console.log(validationResult.error)
-        response.status(400).json(validationResult.error)
+        response.status(400).json({
+            message: validationResult.error.details[0].message
+        })
     }
 }

@@ -2,8 +2,8 @@ const { userModel } = require('../../models/user');
 
 module.exports = ( request, response ) => {
 
-    const userId = request.query.userId;
-    const gameId = request.query.gameId;
+    const userId = request.body.userId;
+    const gameId = request.body.gameId;
 
     console.log('Deleting notifications', userId, gameId)
 

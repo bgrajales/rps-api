@@ -2,7 +2,7 @@ const { userModel } = require('../../models/user');
 
 module.exports = ( request, response ) => {
 
-    const userId = request.query.userId;
+    const userId = request.body.userId;
 
     console.log('Marking notif as read', userId)
 

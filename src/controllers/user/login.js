@@ -10,13 +10,13 @@ const returnCredentials = (user, response) => {
     delete responseUser.password
 
     const token = jwt.sign({
-        id: user._id,
+        id: user.id,
         userName: user.userName,
         type: 'TOKEN'
     }, process.env.JWT_KEY, { expiresIn: '15m' })
 
     const refreshToken = jwt.sign({
-        id: user._id,
+        id: user.id,
         userName: user.userName,
         type: 'REFRESH'
     }, process.env.JWT_KEY, { expiresIn: '30d' })
@@ -42,15 +42,16 @@ module.exports = (request, response) => {
             if (match) {
                 returnCredentials(user, response)
             } else {
-                console.error('Password incorrecto')
-                response.status(401).end()
+                response.status(401).json({
+                    message: 'Usuario o contraseña incorrectos'
+                })
             }
         } else {
-            console.error('Usuario no encontrado')
-            response.status(401).end()
+            response.status(401).json({
+                message: 'Usuario o contraseña incorrectos'
+            })
         }
     }).catch(error => {
-        console.error('No fue posible conectarse a la base de datos', error)
         response.status(500).end()
     })
 

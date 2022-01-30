@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const otplib = require('otplib')
 const { userModel } = require('../../models/user')
 
 module.exports = (request, response) => {
@@ -12,6 +13,7 @@ module.exports = (request, response) => {
                     console.error('Error al verificar el token', err)
                     response.status(401).end()
                 } else {
+                    console.log('Token valido', decoded)
                     userModel.findById(decoded.id).then(user => {
                         if (user) {
 
@@ -20,14 +22,21 @@ module.exports = (request, response) => {
                             delete responseUser.password
 
                             const token = jwt.sign({
-                                id: responseUser._id,
+                                id: responseUser.id,
                                 userName: responseUser.userName,
                                 type: 'TOKEN'
                             }, process.env.JWT_KEY, { expiresIn: '15m' })
 
+                            const refreshToken = jwt.sign({
+                                id: responseUser.id,
+                                userName: responseUser.userName,
+                                type: 'REFRESH'
+                            }, process.env.JWT_KEY, { expiresIn: '30d' })
+
                             response.json({
                                 user: responseUser,
                                 token: token,
+                                refreshToken: refreshToken
                             })
                         } else {
                             console.error('Usuario no encontrado')
