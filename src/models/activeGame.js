@@ -54,6 +54,11 @@ const activeGameSchema = new Schema({
                 winner: 'null'
             }
         ]
+    },
+    chat: {
+        type: Array,
+        required: true,
+        default: []
     }
 })
 

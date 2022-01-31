@@ -32,6 +32,7 @@ const io = socket(server, {
 })
 
 const changeStatus = require('./middlewares/status')
+const updateChat = require('./controllers/games/updateChat')
 
 io.on('connection', (socket) => {
     console.log('made socket connection', socket.id)
@@ -66,6 +67,20 @@ io.on('connection', (socket) => {
         console.log('handPicked', data)
 
         socket.to(data.gameId.toString()).emit('handPickedPlayer2', data.handPicked)
+    })
+
+    socket.on('messageSent', (data) => {
+
+        console.log('messageSent', data)
+
+        
+        socket.to(data.gameId.toString()).emit('recieveMessage', {
+            sender: 'player2',
+            message: data.message,
+            date: new Date(),
+        })
+
+        updateChat(data.gameId, data.userId, data.challengedId, data.message)
     })
 
     socket.on('logout', (data) => {
