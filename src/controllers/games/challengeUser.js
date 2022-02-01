@@ -39,7 +39,9 @@ module.exports = async( request, response ) => {
                 });
 
                 if(alreadyChallenged !== undefined) {
-                    response.status(400).send('You have already been challenged by this user!');
+                    response.status(400).json({
+                        message: 'You have already been challenged by this user!'
+                    });
                 } else {
 
 
