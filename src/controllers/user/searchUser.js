@@ -12,7 +12,6 @@ module.exports = (request, response) => {
     }).then(user => {
 
         if (user) {
-
             response.json({
                 userName: user.userName,
                 userId: user._id,

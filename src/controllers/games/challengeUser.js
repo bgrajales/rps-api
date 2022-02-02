@@ -40,7 +40,7 @@ module.exports = async( request, response ) => {
 
                 if(alreadyChallenged !== undefined) {
                     response.status(400).json({
-                        message: 'You have already been challenged by this user!'
+                        message: `${challengedName} already has a game in progress with you!`
                     });
                 } else {
 
