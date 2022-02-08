@@ -66,7 +66,10 @@ io.on('connection', (socket) => {
     socket.on('handPicked', (data) => {
         console.log('handPicked', data)
 
-        socket.to(data.gameId.toString()).emit('handPickedPlayer2', data.handPicked)
+        socket.to(data.gameId.toString()).emit('handPickedPlayer2', {
+            handPicked: data.handPicked,
+            round: data.round
+        })
     })
 
     socket.on('messageSent', (data) => {
