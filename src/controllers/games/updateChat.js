@@ -3,8 +3,6 @@ const otplib = require('otplib')
 
 module.exports = (gameId, userId, challengedId, message) => {
 
-    console.log(gameId, userId, challengedId, message)
-
     userModel.findOne({
         _id: userId,
     }).then(user => {

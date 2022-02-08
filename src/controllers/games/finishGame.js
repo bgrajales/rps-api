@@ -12,7 +12,6 @@ module.exports = ( request, response ) => {
 
         user.activeGames.forEach( activeGame => {
             if (activeGame.id === gameId) {
-                console.log(activeGame)
                 let winsPlayer1 = 0
                 let winsPlayer2 = 0
                 let winsTie = 0
@@ -81,7 +80,6 @@ module.exports = ( request, response ) => {
                             user.markModified('activeGames')
                             user.save()
                             .then(() => {
-                                console.log('Game finished')
                                 response.status(200).send('Game finished')
                             })
 

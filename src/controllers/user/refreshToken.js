@@ -3,15 +3,12 @@ const otplib = require('otplib')
 const { userModel } = require('../../models/user')
 
 module.exports = (request, response) => {
-    console.log(request.body.refreshToken)
     const refreshTokenBody = request.body.refreshToken
 
-    console.log('refreshToken', refreshTokenBody)
     if (refreshTokenBody) {
         // Token de usuario
         jwt.verify(refreshTokenBody, process.env.JWT_KEY, (error, decoded) => {
 
-            console.log(decoded)
             if (error) {
                 response.status(401).json({
                     message: 'Invalid token'
@@ -32,14 +29,11 @@ module.exports = (request, response) => {
                         type: 'REFRESH'
                     }, process.env.JWT_KEY, { expiresIn: '30d' })
         
-                    console.log('response: ', decoded.userName, token, refreshToken)
-
                     userModel.findOne({
                         userName: decoded.userName
                     }).then(user => {
                         if (user) {
 
-                            console.log(user)
                             const responseUser = user.toJSON()
 
                             delete responseUser.password

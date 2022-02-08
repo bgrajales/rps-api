@@ -35,36 +35,29 @@ const changeStatus = require('./middlewares/status')
 const updateChat = require('./controllers/games/updateChat')
 
 io.on('connection', (socket) => {
-    console.log('made socket connection', socket.id)
     let userId
     
     socket.on('login', (data) =>{
-        console.log('logins', data)
 
         changeStatus(data.toString(), 'online')
         socket.join(data.toString())
 
         userId = data.toString()
 
-        console.log(socket.rooms)
     })
 
     socket.on('sendChallenge', (data) => {
-        console.log('sendChallenge', data)
 
         io.to(data.challenged.toString()).emit('challenge', data)
     })
 
     socket.on('joinGame', (data) => {
-        console.log('joinGame', data)
 
         socket.join(data.gameId.toString())
 
-        console.log(socket.rooms)
     })
 
     socket.on('handPicked', (data) => {
-        console.log('handPicked', data)
 
         socket.to(data.gameId.toString()).emit('handPickedPlayer2', {
             handPicked: data.handPicked,
@@ -74,9 +67,6 @@ io.on('connection', (socket) => {
 
     socket.on('messageSent', (data) => {
 
-        console.log('messageSent', data)
-
-        
         socket.to(data.gameId.toString()).emit('recieveMessage', {
             sender: 'player2',
             message: data.message,
@@ -87,13 +77,11 @@ io.on('connection', (socket) => {
     })
 
     socket.on('logout', (data) => {
-        console.log('logout')
         changeStatus(data.toString(), 'offline')
         socket.leave(socket.id)
     })
 
     socket.on('disconnect', () =>{
-        console.log('disconnect', userId)
 
         if (userId) {
             changeStatus(userId, 'offline')
@@ -152,7 +140,7 @@ app.get('/getGamesHistory', checkUserCredentials(), getGamesHistory)
 mongoose.connect(getDbConnectionString(), { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         server.listen(PORT, () => {
-            console.log(`listening on port ${PORT}`)
+            (`listening on port ${PORT}`)
         })
     }).catch(error => {
         console.error('No fue posible conectarse a la base de datos', error)

@@ -6,7 +6,6 @@ const { userModel } = require('../../models/user')
 module.exports = (request, response) => {
 
     const user = request.body
-    console.log(user)
     const schema = Joi.object({
         userName: Joi.string()
             .regex(/^[a-zA-Z0-9]+$/)
@@ -67,7 +66,6 @@ module.exports = (request, response) => {
             }
         })
     } else {
-        console.log(validationResult.error)
         response.status(400).json({
             message: validationResult.error.details[0].message
         })

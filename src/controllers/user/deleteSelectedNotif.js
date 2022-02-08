@@ -5,8 +5,6 @@ module.exports = ( request, response ) => {
     const userId = request.body.userId;
     const gameId = request.body.gameId;
 
-    console.log('Deleting notifications', userId, gameId)
-
     userModel.findOne({
         _id: userId
     }).then( user => {

@@ -30,7 +30,6 @@ const returnCredentials = (user, response) => {
 }
 
 module.exports = (request, response) => {
-    console.log(request.body.userName)
     userModel.findOne({
         userName: request.body.userName
     }).then(user => {

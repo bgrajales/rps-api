@@ -6,8 +6,6 @@ module.exports = async( request, response ) => {
 
     const userId = request.body.userId;
 
-    console.log(`User ${userId} is challenging you!`);
-
     userModel.findOne({
         _id: userId
     }).then( user => {
@@ -15,8 +13,6 @@ module.exports = async( request, response ) => {
         const challenged = request.body.challengedId;
         const challengedName = request.body.challengedName;
         const userName = request.body.userName;
-
-        console.log(user.activeGames, challenged);
 
         const alreadyChallenged = user.activeGames.find( game => {
             return game.player2.userName === challengedName;

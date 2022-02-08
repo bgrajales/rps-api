@@ -13,7 +13,6 @@ module.exports = (request, response) => {
                     console.error('Error al verificar el token', err)
                     response.status(401).end()
                 } else {
-                    console.log('Token valido', decoded)
                     userModel.findById(decoded.id).then(user => {
                         if (user) {
 
