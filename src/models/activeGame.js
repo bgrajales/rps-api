@@ -6,6 +6,10 @@ const activeGameSchema = new Schema({
         required: true,
         default: Date.now
     },
+    gameType: {
+        type: String,
+        required: true,
+    },
     player1: {
         id: {
             type: String,

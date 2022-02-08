@@ -53,6 +53,7 @@ module.exports = async( request, response ) => {
                         id: challenged,
                         userName: challengedName
                     },
+                    gameType: 'user'
                 }
 
                 user.activeGames.unshift(newUserGame);
@@ -72,6 +73,7 @@ module.exports = async( request, response ) => {
                             id: userId,
                             userName: userName
                         },
+                        gameType: 'user'
                     }
 
                     const newNotification = {

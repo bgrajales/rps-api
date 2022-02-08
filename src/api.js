@@ -113,6 +113,8 @@ const getActiveGameById = require('./controllers/games/getActiveGameById')
 const setActiveGamePlayerHand = require('./controllers/games/setActiveGamePlayerHand')
 const nextRound = require('./controllers/games/nextRound')
 const finishGame = require('./controllers/games/finishGame')
+const challengeAi = require('./controllers/games/challengeAi')
+const setAiGamePlayerHand = require('./controllers/games/setAiGamePlayerHand')
 
 // Users endpoints
 
@@ -130,9 +132,11 @@ app.get('/getStats', checkUserCredentials(), getStats)
 // Games endpoints
 
 app.post('/challengeUser', checkUserCredentials(), challengeUser)
+app.post('/challengeAi', checkUserCredentials(), challengeAi)
 app.post('/setActiveGamePlayerHand', checkUserCredentials(), setActiveGamePlayerHand)
-app.get('/nextRound', checkUserCredentials(), nextRound)
+app.post('/setAiGamePlayerHand', checkUserCredentials(), setAiGamePlayerHand)
 app.post('/finishGame', checkUserCredentials(), finishGame)
+app.get('/nextRound', checkUserCredentials(), nextRound)
 app.get('/getActiveGames', checkUserCredentials(), getActiveGames)
 app.get('/getActiveGameById', checkUserCredentials(), getActiveGameById)
 app.get('/getGamesHistory', checkUserCredentials(), getGamesHistory)
